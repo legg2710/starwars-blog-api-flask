@@ -24,7 +24,6 @@ setup_admin(app)
 @app.errorhandler(APIException)
 def handle_invalid_usage(error):
     return jsonify(error.to_dict()), error.status_code
-
 # generate sitemap with all your endpoints
 @app.route('/')
 def sitemap():
@@ -32,9 +31,26 @@ def sitemap():
 
 @app.route('/people', methods=['GET'])
 def get_people():
+    query_people = People.query.all
+    query_people = list(map(lambda x: x.serialize(), query_people))
+    print(query_people)
 
     response_body = {
-        "msg": "Hello, this is your GET /user response "
+        "msg": "Hello, this is your GET /user response ",
+        "people": query_people
+    }
+
+    return jsonify(response_body), 200
+
+@app.route('/planet', methods=['GET'])
+def get_planet():
+    query_planet = Planet.query.all
+    query_planet = list(map(lambda x: x.serialize(), query_planet))
+    print(query_planet)
+
+    response_body = {
+        "msg": "Hello, this is your GET /user response ",
+        "planet": query_planet
     }
 
     return jsonify(response_body), 200

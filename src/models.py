@@ -5,11 +5,26 @@ db = SQLAlchemy()
 class People(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120), unique=True, nullable=False)
+    planets = db.Column(db.String(120), unique=True, nullable=False)
 
     def serialaze(self):
         return {
             "id": self.id,
-            "name": self.name
+            "name": self.name,
+            "planet": self.planet
+        }
+
+
+class Planet(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(120), unique=True, nullable=False)
+    density = db.Column(db.String(120), unique=True, nullable=False)
+
+    def serialaze(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "planet": self.planet
         }
  
 class User(db.Model):
