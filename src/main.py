@@ -43,7 +43,7 @@ def get_people():
     return jsonify(response_body), 200
 
 @app.route('/people', methods=['POST'])
-def get_people():
+def post_people():
     body = request.get_json()
     print(body)
     people = People(name=body.name)
